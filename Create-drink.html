@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Alcohol Connoisseur</title>
+
+    <!-- This is a 3rd-party stylesheet to make available the font families to be used for this page. -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:100" rel="stylesheet">
+
+    <!-- This is a 3rd-party stylesheet to include Font Awesome icons: http://fontawesome.io/ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <header>
+
+      <div class="header-image-container">
+        <img src="cocktail.png" alt="cocktail" width="200" height="200">
+      </div>
+
+      <h1 class="site-title"><a href="#">Alcohol Connoisseur</a></h1>
+
+    </header>
+
+    <div class="navbar">
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">Account
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="log-in.html">Log in</a>
+          <a href="sign-up.html">Sign Up</a>
+        </div>
+      </div>
+      <a href="Create-drink.html">Create Drink</a>
+      <a style="float:right" href="About.html">About</a>
+    </div>
+
+<div class = "Create_drink">
+  <h1>Upload your drink</h1>
+  <h3>Fill out the form below</h3>
+    <form action = "create-drink.php" method = "post">
+      <label for="fname">Title</label>
+      <input type="text" id="fname" name="firstname" placeholder="Title" required>
+
+      <label for="Description">Description</label>
+      <textarea id="Description" name="Description" placeholder="Description (optional)"></textarea>
+
+      <div id="step_amt">
+        <label for="Steps">Steps</label>
+        <input type="text" id="Steps" name="Steps" placeholder="Step 1" required>
+      </div>
+      <input type="button" value="Add Step" onclick="step_add()">
+
+      <br><br>
+      <div id="Equipment">
+        <label for="Equipment">Equipment</label>
+        <input type="text" id="Equipment" name="Equipment" placeholder="Equipment 1" required>
+      </div>
+        <input type="button" value="Add Equipment" onclick="equip_add()">
+
+      <br><br>
+      <div id="Ingredients">
+        <label for="Ingredients">Ingredients</label>
+        <input type="text" id="Ingredients" name="Ingredients" placeholder="Ingredient 1" required>
+      </div>
+        <input type="button" value="Add Ingredient" onclick="ingred_add()">
+
+      <br><br>
+      <label for="pic">Image</label>
+      <input id = "pic" type="file" name="pic" accept="image/*" placeholder="image">
+
+    <input type = "submit" value = "Submit">
+</div>
+
+
+
+  </body>
+
+  <script src="drink.js" charset="utf-8"></script>
+</html>
