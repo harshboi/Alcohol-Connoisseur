@@ -442,3 +442,18 @@ input[type=text], input[type=password], input[type = file], select, textarea {
     margin-bottom: 16px;
     resize: vertical;
 }
+
+#Ingredients{
+  width: 30%;
+  display:inline;
+}
+
+#Type{
+  width: 20%;
+  display:inline;
+}
+
+#Amount{
+  width: 20%;
+  display:inline;
+}

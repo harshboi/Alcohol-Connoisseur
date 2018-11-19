@@ -65,7 +65,22 @@
       <br><br>
       <div id="Ingredients">
         <label for="Ingredients">Ingredients</label>
+        <br><br>
         <input type="text" id="Ingredients" name="Ingredients" placeholder="Ingredient 1" required>
+        <select id = "Type" name="Type">
+            <option value="Alcohol">Alcohol</option>
+            <option value="Filler">Filler</option>
+            <option value="Seasoning">Seasoning</option>
+            <option value="Fruit">Fruit</option>
+            <option value="NA">N/A</option>
+          </select>
+          <input type="text" id="Amount" name="Amount" placeholder="Amount" required>
+          <select id = "Type" name="Type">
+              <option value="qt">qt</option>
+              <option value="oz">oz</option>
+              <option value="tsp">tsp</option>
+              <option value="NA">N/A</option>
+            </select>
       </div>
         <input type="button" value="Add Ingredient" onclick="ingred_add()">
 
