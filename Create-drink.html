@@ -49,40 +49,28 @@
       <label for="Description">Description</label>
       <textarea id="Description" name="Description" placeholder="Description (optional)"></textarea>
 
-      <div id="step_amt">
+      <div id="Steps_Div">
         <label for="Steps">Steps</label>
-        <input type="text" id="Steps" name="Steps" placeholder="Step 1" required>
+        <br><br>
       </div>
       <input type="button" value="Add Step" onclick="step_add()">
+      <input type="button" id = "removeStep" value="Remove Step" onclick="step_rem()">
 
       <br><br>
-      <div id="Equipment">
+      <div id="Equipment_Div">
         <label for="Equipment">Equipment</label>
-        <input type="text" id="Equipment" name="Equipment" placeholder="Equipment 1" required>
+        <br><br>
       </div>
         <input type="button" value="Add Equipment" onclick="equip_add()">
+        <input type="button" id = "removeEquip" value="Remove Equipment" onclick="equip_rem()">
 
       <br><br>
-      <div id="Ingredients">
+      <div id="Ingredients_Div">
         <label for="Ingredients">Ingredients</label>
         <br><br>
-        <input type="text" id="Ingredients" name="Ingredients" placeholder="Ingredient 1" required>
-        <select id = "Type" name="Type">
-            <option value="Alcohol">Alcohol</option>
-            <option value="Filler">Filler</option>
-            <option value="Seasoning">Seasoning</option>
-            <option value="Fruit">Fruit</option>
-            <option value="NA">N/A</option>
-          </select>
-          <input type="text" id="Amount" name="Amount" placeholder="Amount" required>
-          <select id = "Type" name="Type">
-              <option value="qt">qt</option>
-              <option value="oz">oz</option>
-              <option value="tsp">tsp</option>
-              <option value="NA">N/A</option>
-            </select>
       </div>
         <input type="button" value="Add Ingredient" onclick="ingred_add()">
+        <input type="button" id = "removeIngr" value="Remove Ingredient" onclick="ingred_rem()">
 
       <br><br>
       <label for="pic">Image</label>

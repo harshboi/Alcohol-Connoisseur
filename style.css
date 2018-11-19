@@ -446,14 +446,39 @@ input[type=text], input[type=password], input[type = file], select, textarea {
 #Ingredients{
   width: 30%;
   display:inline;
+  margin-right: 15px;
 }
 
 #Type{
-  width: 20%;
+  width: 10%;
   display:inline;
+  margin-right: 15px;
+}
+
+#TypeAmt{
+  width: 8%;
+  display:inline;
+  margin-right: 15px;
 }
 
 #Amount{
   width: 20%;
   display:inline;
+  margin-right: 15px;
+}
+
+#addStep{
+  display:inline;
+}
+
+#removeStep{
+  display: none;
+}
+
+#removeEquip{
+  display: none;
+}
+
+#removeIngr{
+  display: none;
 }
