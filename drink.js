@@ -29,8 +29,55 @@ function ingred_add(){
   var steps = document.getElementById("Ingredients");
   var stepNew = document.createElement("input");
   stepNew.setAttribute("type", "text");
-  stepNew.setAttribute("id", "Ingredient");
+  stepNew.setAttribute("id", "Ingredients");
   stepNew.setAttribute("name", "Ingredient");
   stepNew.setAttribute("placeholder", "Ingredient " + ingred_amt);
   steps.appendChild(stepNew);
+  var type = document.createElement("select");
+  type.setAttribute("id", "Type");
+  type.setAttribute("name", "Type");
+
+  optionAlch = document.createElement("option");
+  optionAlch.setAttribute("value", "Alcohol");
+  alcohol = document.createTextNode("Alcohol");
+  optionAlch.appendChild(alcohol);
+
+  optionfill = document.createElement("option");
+  optionfill.setAttribute("value", "Filler");
+  filler = document.createTextNode("Filler");
+  optionfill.appendChild(filler);
+
+  optionseas = document.createElement("option");
+  optionseas.setAttribute("value", "Seasoning");
+  seasoning = document.createTextNode("Seasoning");
+  optionseas.appendChild(seasoning);
+
+  optionfrui = document.createElement("option");
+  optionfrui.setAttribute("value", "Fruit");
+  fruit = document.createTextNode("Fruit");
+  optionfrui.appendChild(fruit);
+
+  optionna = document.createElement("option");
+  optionna.setAttribute("value", "NA");
+  na = document.createTextNode("N/A");
+  optionna.appendChild(na);
+
+  type.appendChild(optionAlch);
+  type.appendChild(optionfill);
+  type.appendChild(optionseas);
+  type.appendChild(optionfrui);
+  type.appendChild(optionna);
+  steps.appendChild(type);
+
+  amount = document.createElement("input");
+  amount.setAttribute("type", "text");
+  amount.setAttribute("id", "Amount");
+  amount.setAttribute("name", "Amount");
+  amount.setAttribute("placeholder", "Amount");
+
+  steps.appendChild(amount);
+
+
+
+
 }
