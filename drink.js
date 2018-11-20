@@ -20,6 +20,14 @@ function equip_rem(){
   }
 }
 
+function signup(){
+  location.href = 'sign-up.html';
+}
+
+function login(){
+  location.href = 'log-in.html';
+}
+
 function ingred_rem(){
   removeIng = document.getElementById("Ingredients_Div").querySelectorAll("#Ingredients");
   removeIng[ingred_amt-1].parentNode.removeChild(removeIng[ingred_amt-1]);
