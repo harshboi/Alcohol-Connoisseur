@@ -27,7 +27,7 @@
     <header>
 
       <div class="header-image-container">
-        <img src="cocktail.png" alt="cocktail" width="200" height="200">
+        <img src="cocktail.png" alt="cocktail" width="100" height="100">
       </div>
 
       <h1 class="site-title"><a href="#">Alcohol Connoisseur</a></h1>
