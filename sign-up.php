@@ -45,11 +45,14 @@ if (isset($_GET['logout'])) {
         <div class="dropdown-content">
           <a href="log-in.php">Log in</a>
           <a href="sign-up.php">Sign Up</a>
+          <?php if(isset($_SESSION['username'])) : ?>
+            <a href="my-account.php">My Account</a>
+          <?php endif ?>
         </div>
       </div>
       <a href="Create-drink.php">Create Drink</a>
       <?php if(isset($_SESSION['username'])) : ?>
-        <a style="float:right" id = "test">Welcome <?php echo $_SESSION['username']; ?></a>
+        <a style="float:right" href="my-account.php">Welcome <?php echo $_SESSION['username']; ?></a>
         <a style="float:right" href="index.php?logout='1'">Logout</a>
       <?php endif ?>
       <a href="About.php">About</a>

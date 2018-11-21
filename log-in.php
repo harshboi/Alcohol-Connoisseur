@@ -44,11 +44,14 @@ if (isset($_GET['logout'])) {
         <div class="dropdown-content">
           <a href="log-in.php">Log in</a>
           <a href="sign-up.php">Sign Up</a>
+          <?php if(isset($_SESSION['username'])) : ?>
+            <a href="my-account.php">My Account</a>
+          <?php endif ?>
         </div>
       </div>
       <a href="Create-drink.php">Create Drink</a>
       <?php if(isset($_SESSION['username'])) : ?>
-        <a style="float:right" id = "test">Welcome <?php echo $_SESSION['username']; ?></a>
+        <a style="float:right" href="my-account.php">Welcome <?php echo $_SESSION['username']; ?></a>
         <a style="float:right" href="index.php?logout='1'">Logout</a>
       <?php endif ?>
       <a href="About.php">About</a>
@@ -57,7 +60,15 @@ if (isset($_GET['logout'])) {
     <div class = "login">
       <h1>Have an account?</h1>
         <form action = "log-in.php" method = "post">
-          <?php include('errors.php'); ?>
+          <?php
+            include('errors.php');
+          ?>
+          <?php if(isset($_SESSION['verify'])) : ?>
+            <div class="error">
+                <p>Need to log in before uploading a drink</p>
+            </div>
+          <?php endif ?>
+          <?php unset($_SESSION['verify']); ?>
           <br>
           <input type="text" name="Username" placeholder="Username" required>
           <br><br>
