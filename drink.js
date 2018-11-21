@@ -21,11 +21,11 @@ function equip_rem(){
 }
 
 function signup(){
-  location.href = 'sign-up.html';
+  location.href = 'sign-up.php';
 }
 
 function login(){
-  location.href = 'log-in.html';
+  location.href = 'log-in.php';
 }
 
 function ingred_rem(){
