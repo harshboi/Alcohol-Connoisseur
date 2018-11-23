@@ -69,11 +69,13 @@ if (isset($_GET['logout'])) {
           <br>
           <input type="text" name="LastName" placeholder="Last Name (optional)">
           <br>
-          <input type="text" name="Email" placeholder="Email" required>
+          <input type="email" name="Email" placeholder="Email" required>
           <br>
           <input type="date" name="Birthday" placeholder="Birthday (optional)">
           <br>
           <input type="password" name="Password" placeholder="Password" required>
+          <br>
+          <input type="password" name="Repass" placeholder="Enter Password again" required>
           <br><br>
         <input type = "submit" name ="register" value = "Sign up">
         <input type="button" value="Log In" onclick="login()">

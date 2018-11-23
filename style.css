@@ -291,6 +291,15 @@ header a {
   margin-top: 50px;
 }
 
+.account{
+  margin: auto;
+  width: 80%;
+  border: 2px solid black;
+  padding: 10px;
+  padding-bottom: 500px;
+  margin-top: 50px;
+}
+
 .Create_drink{
   margin: auto;
   width: 80%;
@@ -301,6 +310,20 @@ header a {
 
 #Description{
   height:200px
+}
+
+table.drinks {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.drinks {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.drinks th, .drinks td {
+    border: 1px solid black;
 }
 
 input{
@@ -350,7 +373,7 @@ input[type=text], input[type=password], input[type = file], select, textarea {
     resize: vertical;
 }
 
-input[type = date]{
+input[type = date], input[type = email]{
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -359,7 +382,6 @@ input[type = date]{
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
-
 }
 
 .error{
