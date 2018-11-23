@@ -68,7 +68,12 @@ if (isset($_GET['logout'])) {
                 <p>Need to log in before uploading a drink</p>
             </div>
           <?php endif ?>
-          <?php unset($_SESSION['verify']); ?>
+          <?php if(isset($_SESSION['newpass'])) : ?>
+            <div class="error">
+                <p>Password changed login again</p>
+            </div>
+          <?php endif ?>
+          <?php unset($_SESSION['verify']); unset($_SESSION['newpass']);?>
           <br>
           <input type="text" name="Username" placeholder="Username" required>
           <br><br>
