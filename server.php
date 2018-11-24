@@ -74,11 +74,7 @@
     $email = $user['Email'];
     $first = $user['First'];
     $last = $user['Last'];
-<<<<<<< HEAD
     $password = $user['PasswordHash'];
-=======
-    $password = $user['Password'];
->>>>>>> 3f28a614755c80007c6ab4d05237f11cb03edd72
     if($_POST["FirstName"] != ""){
       $first = $_POST["FirstName"];
     }
@@ -110,7 +106,6 @@
     }
   }
 
-<<<<<<< HEAD
   if(isset($_POST['deleteD'])){
     if(isset($_POST['verify'])){
       $selectOption = $_POST["drinksDelete"];
@@ -124,8 +119,6 @@
     }
   }
 
-=======
->>>>>>> 3f28a614755c80007c6ab4d05237f11cb03edd72
 
 
 
