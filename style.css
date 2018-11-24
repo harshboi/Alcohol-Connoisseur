@@ -52,6 +52,12 @@ header {
   align-items: center;
   display: flex;
   position: relative;
+  height: 130px;
+}
+
+.header-image-container img{
+  width: 140px;
+  height: 125px;
 }
 
 header a {
@@ -60,7 +66,7 @@ header a {
 
 .site-title {
   font-family: "Roboto Slab", serif;
-  font-size: 80px;
+  font-size: 70px;
   font-weight: 100;
   margin: 0 0px 0px 20px;
   padding-top: 30px;
@@ -199,119 +205,12 @@ header a {
   outline: none;
 }
 
-/*
- * Modal stuff
- */
-
-#modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.85);
-}
-
-#sell-something-modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1010;
-  overflow: scroll;
-}
-
-.hidden {
-  display: none;
-}
-
-.modal-dialog {
-  width: auto;
-  max-width: 600px;
-  min-width: 350px;
-  min-height: 300px;
-  margin: 40px auto;
-  background-color: #fff;
-  border-radius: 15px;
-}
-
-.modal-header {
-  position: relative;
-  padding: 10px 20px;
-}
-
-.modal-header h3 {
-  margin: 0;
-  font-size: 28px;
-}
-
-#modal-close {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-  font-size: 24px;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.post-input-element {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  margin: 10px 0;
-}
-
-.post-input-element > label {
-  font-weight: 600;
-  flex: 1 75px;
-  margin-right: 10px;
-}
-
-.post-input-element input {
-  flex: 6 200px;
-  padding: 8px;
-  font-size: 20px;
-  border: 1px solid #aaa;
-}
-
-.post-fieldset {
-  flex: 1 100%;
-  border: 1px solid #ababab;
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px 10px 20px 10px;
-}
-
-#modal-cancel,
-#modal-accept {
-  margin-right: 20px;
-}
-
-#modal-cancel {
-  color: #333;
-  background-color: #fff;
-}
-
-#modal-cancel:hover {
-  background-color: #eee;
-}
-
 .navbar {
     overflow: hidden;
     background-color: #333;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
+
 
 .navbar a {
     float: left;
@@ -392,6 +291,15 @@ header a {
   margin-top: 50px;
 }
 
+.account{
+  margin: auto;
+  width: 80%;
+  border: 2px solid black;
+  padding: 10px;
+  padding-bottom: 500px;
+  margin-top: 50px;
+}
+
 .Create_drink{
   margin: auto;
   width: 80%;
@@ -402,6 +310,20 @@ header a {
 
 #Description{
   height:200px
+}
+
+table.drinks {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.drinks {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.drinks th, .drinks td {
+    border: 1px solid black;
 }
 
 input{
@@ -415,6 +337,10 @@ input{
   line-height: 20px;
   display: inline-block;
   text-decoration: none;
+}
+
+input[type=checkbox]{
+  width: 5%;
 }
 
 input[type=submit]{
@@ -451,7 +377,7 @@ input[type=text], input[type=password], input[type = file], select, textarea {
     resize: vertical;
 }
 
-input[type = date]{
+input[type = date], input[type = email]{
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -460,7 +386,6 @@ input[type = date]{
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
-
 }
 
 .error{

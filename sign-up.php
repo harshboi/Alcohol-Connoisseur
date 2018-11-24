@@ -45,11 +45,14 @@ if (isset($_GET['logout'])) {
         <div class="dropdown-content">
           <a href="log-in.php">Log in</a>
           <a href="sign-up.php">Sign Up</a>
+          <?php if(isset($_SESSION['username'])) : ?>
+            <a href="my-account.php">My Account</a>
+          <?php endif ?>
         </div>
       </div>
       <a href="Create-drink.php">Create Drink</a>
       <?php if(isset($_SESSION['username'])) : ?>
-        <a style="float:right" id = "test">Welcome <?php echo $_SESSION['username']; ?></a>
+        <a style="float:right" href="my-account.php">Welcome <?php echo $_SESSION['username']; ?></a>
         <a style="float:right" href="index.php?logout='1'">Logout</a>
       <?php endif ?>
       <a href="About.php">About</a>
@@ -66,11 +69,13 @@ if (isset($_GET['logout'])) {
           <br>
           <input type="text" name="LastName" placeholder="Last Name (optional)">
           <br>
-          <input type="text" name="Email" placeholder="Email" required>
+          <input type="email" name="Email" placeholder="Email" required>
           <br>
           <input type="date" name="Birthday" placeholder="Birthday (optional)">
           <br>
           <input type="password" name="Password" placeholder="Password" required>
+          <br>
+          <input type="password" name="Repass" placeholder="Enter Password again" required>
           <br><br>
         <input type = "submit" name ="register" value = "Sign up">
         <input type="button" value="Log In" onclick="login()">

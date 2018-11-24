@@ -4,6 +4,7 @@
 
   $username = "";
   $errors = array();
+  $errorsDelete = array();
 
   $host = 'classmysql.engr.oregonstate.edu';
   $db = 'cs340_schutfot';
@@ -25,6 +26,10 @@
     $user = $res->fetch();
     if($_POST["Username"] === $user['Username']){
       array_push($errors, "Username already exists");
+      $userVerify = 1;
+    }
+    if($_POST["Password"] != $_POST['Repass']){
+      array_push($errors, "Passwords dont match");
       $userVerify = 1;
     }
     if($userVerify == 0){
@@ -52,5 +57,69 @@
       array_push($errors, "Wrong username or password");
     }
   }
+
+  if(isset($_POST['update'])){
+    $birthday;
+    $email;
+    $first;
+    $last;
+    $password;
+    $redirect;
+    $verify = 0;
+    $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+    $res = $pdo->prepare("SELECT Username, Birthday, Email, First, Last, PasswordHash FROM User WHERE Username = ?");
+    $res->execute([$_SESSION['username']]);
+    $user = $res->fetch();
+    $birthday = $user['Birthday'];
+    $email = $user['Email'];
+    $first = $user['First'];
+    $last = $user['Last'];
+    $password = $user['PasswordHash'];
+    if($_POST["FirstName"] != ""){
+      $first = $_POST["FirstName"];
+    }
+    if($_POST["LastName"] != ""){
+      $last = $_POST["LastName"];
+    }
+    if($_POST["Birthday"] != ""){
+      $birthday = $_POST["Birthday"];
+    }
+    if($_POST["Email"] != ""){
+      $email = $_POST["Email"];
+    }
+    if($_POST["Password"] != ""){
+      $password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
+      $redirect = 1;
+    }
+    if($_POST["Password"] != $_POST['Repass']){
+      array_push($errors, "Passwords dont match");
+      $verify = 1;
+    }
+    if($verify == 0){
+      $res = $pdo->prepare("UPDATE User SET Birthday = ?, Email = ?, First = ?, Last = ?, PasswordHash = ? WHERE Username = ?");
+      $res->execute([$birthday, $email, $first, $last, $password, $_SESSION['username']]);
+      $user = $res->fetch();
+      if($redirect == 1){
+        $_SESSION['newpass'] = 1;
+        header('location: log-in.php');
+      }
+    }
+  }
+
+  if(isset($_POST['deleteD'])){
+    if(isset($_POST['verify'])){
+      $selectOption = $_POST["drinksDelete"];
+      $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+      $res = $pdo->prepare("DELETE FROM Drink WHERE Drink_ID = ?");
+      $res->execute([$selectOption]);
+      $user = $res->fetch();
+    }
+    else{
+      array_push($errorsDelete, "Need to verify checkbox");
+    }
+  }
+
+
+
 
 ?>
