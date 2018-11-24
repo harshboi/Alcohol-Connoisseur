@@ -1,4 +1,5 @@
 <?php
+  //Used for maintaining sessions and ensuring that login information persists between pages and if the user decides to logout
   include('server.php');
   session_start();
 
@@ -90,9 +91,27 @@
           <br>
           <input type="password" name="Repass" placeholder="Enter New Password again">
           <br><br>
-        <input type = "submit" name ="update" value = "Change">
+        <input type = "submit" name ="update" value = "Update">
     <hr>
     <!-- </div> -->
+    <div class = "UpdateDrink" style="display:none">
+      <h2>Update Drink Information</h2>
+        <form action = "my-account.php" method = "post">
+          <br>
+          <label for="drinksUpdate">Drink List</label>
+          <select id="drinksUpdate" class="drinksUpdate" name="drinksUpdate">
+
+          </select>
+          <br><br>
+          <input type="text" id="Title" name="Title" placeholder="Title">
+          <br><br>
+          <textarea id="Description" name="Description" placeholder="Description"></textarea>
+          <br><br>
+          <input id = "pic" type="file" name="pic" accept="image/*" placeholder="image">
+          <br><br>
+        <input type = "submit" name ="updateDrink" value = "Update">
+    <hr>
+    </div>
     <div class = "delete" style="display:none">
       <h2>Delete Drinks</h2>
       <?php

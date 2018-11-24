@@ -1,8 +1,14 @@
-var step_amt = 0;
-var equip_amt = 0;
-var ingred_amt = 0;
+var step_amt = 0; //Number of steps added by the user when they to upload a new drink
+var equip_amt = 0; //Number of equipment added by the user when they try to upload a new drink
+var ingred_amt = 0; //Number of ingredients added by the user when they try to upload a new drink
 
+
+/*
+  Function: step_rem()
+  Description: This will remove a step input box if the user desires
+*/
 function step_rem(){
+  //Based on the step_amt delete the last created step input box
   remove = document.getElementById("Steps_Div").querySelectorAll("#Steps");
   remove[step_amt-1].parentNode.removeChild(remove[step_amt-1]);
   step_amt--;
@@ -11,7 +17,13 @@ function step_rem(){
   }
 }
 
+
+/*
+  Function: equip_rem()
+  Description: This will remove a equipment input box if the user desires
+*/
 function equip_rem(){
+  //Based on the equip_amt delete the laste created equipment input box
   remove = document.getElementById("Equipment_Div").querySelectorAll("#Equipment");
   remove[equip_amt-1].parentNode.removeChild(remove[equip_amt-1]);
   equip_amt--;
@@ -20,24 +32,41 @@ function equip_rem(){
   }
 }
 
+/*
+  Function: signup()
+  Description: If the user wants to create a new account then they will be redirected to the signup page
+*/
 function signup(){
   location.href = 'sign-up.php';
 }
 
+/*
+  Function: login()
+  Description: If the user wants to login with an existing account then they will be redirected to the log in page
+*/
 function login(){
   location.href = 'log-in.php';
 }
 
+
+/*
+  Function: ingred_rem()
+  Description: This will remove an ingredient inbox box if the user desires
+*/
 function ingred_rem(){
+  //Based on the ingred_amt remove the textbox for ingredients
   removeIng = document.getElementById("Ingredients_Div").querySelectorAll("#Ingredients");
   removeIng[ingred_amt-1].parentNode.removeChild(removeIng[ingred_amt-1]);
 
+  //Based on the ingred_amt remove the type listbox
   removeIng = document.getElementById("Ingredients_Div").querySelectorAll("#Type");
   removeIng[ingred_amt-1].parentNode.removeChild(removeIng[ingred_amt-1]);
 
+  //Based on the ingred_amt remove the textbox for Amount
   removeIng = document.getElementById("Ingredients_Div").querySelectorAll("#Amount");
   removeIng[ingred_amt-1].parentNode.removeChild(removeIng[ingred_amt-1]);
 
+  //Based on the ingred_amt remove the TypeAmt listbox
   removeIng = document.getElementById("Ingredients_Div").querySelectorAll("#TypeAmt");
   removeIng[ingred_amt-1].parentNode.removeChild(removeIng[ingred_amt-1]);
 
@@ -49,7 +78,12 @@ function ingred_rem(){
 
 }
 
+/*
+  Function: step_add()
+  Description: Adds a new step input box if the user desires
+*/
 function step_add(){
+  //Creates a new input textbox for the user to enter additional step information
   step_amt++;
   document.getElementById("removeStep").style.display = "block";
   var steps = document.getElementById("Steps_Div");
@@ -62,7 +96,12 @@ function step_add(){
   steps.appendChild(stepNew);
 }
 
+/*
+  Function: equip_add()
+  Description: Adds a new equipment input box if the user desires
+*/
 function equip_add(){
+  //Creates a new input textbox for the user to enter additional equipment information
   equip_amt++;
   document.getElementById("removeEquip").style.display = "block";
   var steps = document.getElementById("Equipment_Div");
@@ -75,7 +114,13 @@ function equip_add(){
   steps.appendChild(stepNew);
 }
 
+/*
+  Function: ingred_add()
+  Description: Adds a new ingredient input box if the user desires
+*/
 function ingred_add(){
+
+  //Creates a new input textbox for the user to enter additional ingredient information
   ingred_amt++
   document.getElementById("removeIngr").style.display = "block";
   var steps = document.getElementById("Ingredients_Div");
@@ -88,6 +133,7 @@ function ingred_add(){
 
   steps.appendChild(stepNew);
 
+  //Creates a new listbox where the user can pick what type of ingredient
   var type = document.createElement("select");
   type.setAttribute("id", "Type");
   type.setAttribute("name", "Type");
@@ -124,6 +170,7 @@ function ingred_add(){
   type.appendChild(optionna);
   steps.appendChild(type);
 
+  //Creates a new text input box where the user can enter the amount of ingredients
   amount = document.createElement("input");
   amount.setAttribute("type", "text");
   amount.setAttribute("id", "Amount");
@@ -133,6 +180,7 @@ function ingred_add(){
   steps.appendChild(amount);
 
 
+  //Creates a new list box where the user can pick what measurement type for the amount
   var typeamt = document.createElement("select");
   typeamt.setAttribute("id", "TypeAmt");
   typeamt.setAttribute("name", "Type");

@@ -1,12 +1,13 @@
 <?php
-include('server.php');
-session_start();
+  //Used for maintaining sessions and ensuring that login information persists between pages and if the user decides to logout
+  include('server.php');
+  session_start();
 
-if (isset($_GET['logout'])) {
-  session_destroy();
-  unset($_SESSION['username']);
-  header("location: index.php");
-}
+  if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: index.php");
+  }
 
 
  ?>
