@@ -4,7 +4,6 @@ $.ajax({
     dataType: "json",
     success: function(data){
         console.log(data);
-        //$('.drinks').append("<hr>");
         //$('.drinks').append("<tr>");
         if(data[0].drinks == 1){
           max = data[0].drinks;
@@ -23,7 +22,6 @@ $.ajax({
           $('.drinks').append("<p>" + "<strong>Drink Description:</strong> " + data[1][i] + "</p>\n");
         }
         $('.drinks').append("<hr>");
-
 
         if(data[2].comments == 1){
           max = data[2].comments;
