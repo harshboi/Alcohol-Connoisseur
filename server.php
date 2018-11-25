@@ -9,7 +9,8 @@
   $db = 'cs340_schutfot';
   $user = 'cs340_schutfot';
   $charset = 'utf8mb4';
-  $pass = 'Obama08';
+  $pass1 = fopen("db-password.txt", "r") or die("Unable to open file!");
+  $pass = (string)fread($pass1,100);
   $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
   $opt = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
