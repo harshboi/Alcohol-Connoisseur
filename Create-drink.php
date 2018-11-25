@@ -20,6 +20,7 @@
     <meta charset="utf-8">
     <title>Alcohol Connoisseur</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- This is a 3rd-party stylesheet to make available the font families to be used for this page. -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:100" rel="stylesheet">
 
@@ -76,24 +77,24 @@
         <label for="Steps">Steps</label>
         <br><br>
       </div>
-      <input type="button" value="Add Step" onclick="step_add()">
-      <input type="button" id = "removeStep" value="Remove Step" onclick="step_rem()">
+      <input type="button" id = "addstep" value="Add Step">
+      <input type="button" id = "removeStep" value="Remove Step">
 
       <br><br>
       <div id="Equipment_Div">
         <label for="Equipment">Equipment</label>
         <br><br>
       </div>
-        <input type="button" value="Add Equipment" onclick="equip_add()">
-        <input type="button" id = "removeEquip" value="Remove Equipment" onclick="equip_rem()">
+        <input type="button" id = "addEquip" value="Add Equipment">
+        <input type="button" id = "removeEquip" value="Remove Equipment">
 
       <br><br>
       <div id="Ingredients_Div">
         <label for="Ingredients">Ingredients</label>
         <br><br>
       </div>
-        <input type="button" value="Add Ingredient" onclick="ingred_add()">
-        <input type="button" id = "removeIngr" value="Remove Ingredient" onclick="ingred_rem()">
+        <input type="button" id = "addIngr" value="Add Ingredient">
+        <input type="button" id = "removeIngr" value="Remove Ingredient">
 
       <br><br>
       <label for="pic">Image</label>
