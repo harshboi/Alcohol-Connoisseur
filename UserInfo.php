@@ -1,5 +1,6 @@
   <?php
             //Used for maintaining the currently logged in user when visiting different pages
+            include 'db-password.php';
             session_start();
 
             //Variables to hold DB authentication information to connect to the DB and to operate on using PDO
@@ -7,7 +8,7 @@
             $db = 'cs340_schutfot';
             $user = 'cs340_schutfot';
             $charset = 'utf8mb4';
-            $pass = 'Obama08';
+            $pass = DB_PASSWORD;
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
             $opt = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

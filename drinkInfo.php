@@ -3,11 +3,12 @@
           session_start();
 
           //Variables to hold DB authentication information to connect to the DB and to operate on using PDO
+          include 'db-password.php';  // this file includes the database password as a CONST DB_PASSWORD
           $host = 'classmysql.engr.oregonstate.edu';
           $db = 'cs340_schutfot';
           $user = 'cs340_schutfot';
           $charset = 'utf8mb4';
-          $pass = 'Obama08';
+          $pass = DB_PASSWORD;
           $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
           $opt = [
           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
