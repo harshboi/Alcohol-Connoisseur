@@ -61,6 +61,7 @@
       <a href="About.php">About</a>
     </div>
 
+  <div class = account>
       <section id="drinkpage">
 
 
@@ -253,7 +254,7 @@
 			while($row = $stmt5->fetch(PDO::FETCH_ASSOC)){
 				$commenter = $row['Username'];
 				$commentText = $row['Text'];
-				echo "Commenter :",$commenter," -- ";
+				echo $commenter," -- ";
 				echo $commentText;
 				echo"<p>";
 			}
@@ -283,6 +284,7 @@
         <input type = "submit" name ="newcomment" value = "Add Comment">
       <?php endif ?>
       <?php unset($_SESSION['drinkID']); ?>
+    </div>
 
   </body>
 
