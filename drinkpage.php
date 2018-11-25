@@ -109,7 +109,7 @@
 			echo "You already liked the drink<br>";
 		}
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like'])) {
 		// this code block is executed when the user likes a drink
 
 
@@ -167,7 +167,8 @@
 				if ( $removeLike == 0) {
 					echo" <form method='post'>";
 					//echo"<label>Like the drink ";
-					echo"<input type = 'submit'  value = 'Like it' />";
+					echo"<input type = 'submit' name = 'like' value = 'Like it' />";
+          echo"</form>";
 				}
 				echo"<div class='post-image-container'>";
 				echo"<img src='images/",$photo,"'>";
@@ -275,7 +276,7 @@
 
 
       <?php if(isset($_SESSION['username'])) : ?>
-      <form action = "drinkpage.php" method = "post">
+      <form method = "post">
         <input type="text" id = "comment" name="comment" placeholder="Comment">
         <br>
         <input type="text" id = "drinkID" name="drinkID" value = '<?php echo $_SESSION['drinkID']; ?>' style = "display: none">
