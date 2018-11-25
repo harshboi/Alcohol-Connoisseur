@@ -1,16 +1,16 @@
 <?php
 
+  include 'db-password.php';
   session_start();
 
   $username = "";
   $errors = array();
-
+  $errorsDelete = array();
   $host = 'classmysql.engr.oregonstate.edu';
   $db = 'cs340_schutfot';
   $user = 'cs340_schutfot';
   $charset = 'utf8mb4';
-  $pass1 = fopen("db-password.txt", "r") or die("Unable to open file!");
-  $pass = (string)fread($pass1,100);
+  $pass = DB_PASSWORD;
   $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
   $opt = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -152,6 +152,16 @@
     }
   }
 
+  if(isset($_POST['newcomment'])){
+    $comment = $_POST["comment"];
+    $drinkID = $_POST["drinkID"];
+    $username = $_SESSION['username'];
+    //$drinkID = $_POST["drinkID"];
+    $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+    $res = $pdo->prepare('INSERT INTO Comment(Text, Drink_ID, Username) VALUES (?,?,?)');
+    $res->execute([$comment, $drinkID, $username]);
+  }
+
   //If the user wants to update the title, description or photo of any drinks
   if(isset($_POST['updateDrink'])){
 
@@ -187,23 +197,23 @@
     $res = $pdo->prepare("UPDATE Drink SET Photo = ?, Title = ?, Description = ? WHERE Drink_ID = ?");
     $res->execute([$photo, $title, $description, $selectOption]);
   }
-      
+
   if (isset($_POST['create_drink'])) {
     try {
       $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
       $res = $pdo->prepare("SELECT COUNT(Title) AS C FROM Drink WHERE Username = ? AND Title = ?");
       $res->execute([$_SESSION["username"],$_POST["firstname"]]);
       $insertion = $res->fetch();
-    
+
       if ($insertion["C"] != 0) {
         echo "<script type=\"text/javascript\"> var err = function () {alert(\"Hello! I am an alert box!!\")} err() </script>";
         echo "<div class=\"alert\">
-        <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> 
+        <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>
         You already created a drink with this title.
       </div> ";
       }
       else {
-        // echo "SHITTT";
+
         // echo " sascjsabvjhasbdvkhbsdvbaskhdvbsajdbsdvbasjdvbaskhvbskhab";
         // For Ingredients list
         $type_amt_arr = array();
@@ -230,7 +240,7 @@
 
         // For steps field
         $steps_arr = array();
-        
+
         foreach ($_POST["Steps"] as $key) {
           array_push($steps_arr, $key);
         }
@@ -247,7 +257,7 @@
         $res->execute([$_POST["pic"],$_POST["firstname"],$_POST["Description"],$_SESSION["username"]]);
         // echo "$<br>";
         // $res = $pdo->query("INSERT INTO Drink (Photo,Title,Description,Username) VALUES ('','svsdvs','sdvsdv','abc')");
-        
+
         // echo "$_POST[\"Photo\"]],$_POST[\"firstname\"],$_POST[\"Description\"],$_POST[\"Username\"]";
         var_dump($_POST);
 
@@ -256,7 +266,7 @@
         DRINK_ID AS ID FROM Drink WHERE Drink.Title = ?");
         $res->execute([$_POST["firstname"]]);
         $nameid_fetch = $res->fetch();
-        
+
         # Inserts the equipment realated stuff
         if (count($equipment_arr) > 0){
           echo count($equipment_arr);
@@ -303,7 +313,7 @@
             else {  // If a new ingredient is being used
               $res = $pdo->prepare("INSERT INTO Ingredient (Name, Type, Units) VALUES (?,?,?)");
               $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
-              echo " hello <br> $type_amt_arr[$i]";  
+              echo " hello <br> $type_amt_arr[$i]";
               $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
               $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
               $ing_id1 = $res->fetch();

@@ -73,7 +73,7 @@ $.ajax({
 
         //Creates a new text input box where the user can enter the amount of ingredients
         amount = document.createElement("input");
-        amount.setAttribute("type", "text");
+        amount.setAttribute("type", "number");
         amount.setAttribute("id", "Amount");
         amount.setAttribute("name", "Amount");
         amount.setAttribute("placeholder", "Amount");
