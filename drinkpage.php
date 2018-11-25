@@ -84,6 +84,7 @@
 		//echo "current user ",$currentUser;
 
 		$removeLike = 0;
+    $liked = 0;
 
 		$pdo2 = new PDO($dsn, $user, $pass, $opt);
 
@@ -93,7 +94,7 @@
 		$stmt2->execute();
 
 		if ($stmt2->rowCount() < 1) {
-			echo "You must be logged in to like";
+			//echo "You must be logged in to like";
 			// echo "Current User: ",$currentUser;
 			$removeLike = 1;
 		}
@@ -107,7 +108,7 @@
 		if ($stmt->rowCount() > 0) {
 			// username already liked the drink
 			$removeLike = 1;
-			echo "You already liked the drink<br>";
+			//echo "<h3>You already liked the drink</h3><br>";
 		}
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like'])) {
@@ -124,7 +125,7 @@
 		if ($stmt->rowCount() > 0) {
 			// username already liked the drink
 			$removeLike = 1;
-			echo "You already liked the drink<br>";
+			//echo "You already liked the drink<br>";
 		} else {
 
 			// prepare the insertion of the values into the database to prevent injections
@@ -135,7 +136,8 @@
 			$stmt2->execute();
 
 			if ($stmt2->rowCount() == 1) {
-				echo "You Liked it! <p>";
+				echo "<h4>You Liked it! </h4><p>";
+        $liked = 1;
 				$removeLike = 1;
 			} else {
 				echo "Error liking ";
@@ -177,6 +179,11 @@
 				echo "<p> Title: ";
 				echo $title;
 				echo "</a> <span class='post-price'>",$likes," Likes </span>";
+        if (($removeLike == 1 || $stmt2->rowCount() == 0) && $liked == 0 && $_SESSION['username']) {
+          // username already liked the drink
+          $removeLike = 1;
+          echo "<h4>You already liked the drink</h4>";
+        }
 				echo "<p> Description: ";
 				echo $description;
 				echo "<p> Created by: ";
