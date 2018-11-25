@@ -1,7 +1,9 @@
 <?php
   //Used for maintaining sessions and ensuring that login information persists between pages and if the user decides to logout
-  session_start();
 
+  include('server.php');
+  session_start();
+  
   if (!isset($_SESSION['username'])) {
   	$_SESSION['verify'] = "You must log in first";
   	header('location: log-in.php');
@@ -20,7 +22,6 @@
     <meta charset="utf-8">
     <title>Alcohol Connoisseur</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- This is a 3rd-party stylesheet to make available the font families to be used for this page. -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:100" rel="stylesheet">
 
@@ -47,7 +48,7 @@
         <button class="dropbtn">Account
           <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
+      <div class="dropdown-content">
           <a href="log-in.php">Log in</a>
           <a href="sign-up.php">Sign Up</a>
           <?php if(isset($_SESSION['username'])) : ?>
@@ -57,7 +58,7 @@
       </div>
       <a href="Create-drink.php">Create Drink</a>
       <?php if(isset($_SESSION['username'])) : ?>
-        <a style="float:right" href="my-account.php">Welcome <?php echo $_SESSION['username']; ?></a>
+        <a style="float:right" id = "test">Welcome <?php echo $_SESSION['username']; ?></a>
         <a style="float:right" href="index.php?logout='1'">Logout</a>
       <?php endif ?>
       <a href="About.php">About</a>
@@ -66,7 +67,7 @@
 <div class = "Create_drink">
   <h1>Upload your drink</h1>
   <h3>Fill out the form below</h3>
-    <form action = "create-drink.php" method = "post">
+    <form action = "Create-drink.php" method = "post">
       <label for="fname">Title</label>
       <input type="text" id="fname" name="firstname" placeholder="Title" required>
 
@@ -77,30 +78,30 @@
         <label for="Steps">Steps</label>
         <br><br>
       </div>
-      <input type="button" id = "addstep" value="Add Step">
-      <input type="button" id = "removeStep" value="Remove Step">
+      <input type="button" value="Add Step" onclick="step_add()">
+      <input type="button" id = "removeStep" value="Remove Step" onclick="step_rem()">
 
       <br><br>
       <div id="Equipment_Div">
         <label for="Equipment">Equipment</label>
         <br><br>
       </div>
-        <input type="button" id = "addEquip" value="Add Equipment">
-        <input type="button" id = "removeEquip" value="Remove Equipment">
+        <input type="button" value="Add Equipment" onclick="equip_add()">
+        <input type="button" id = "removeEquip" value="Remove Equipment" onclick="equip_rem()">
 
       <br><br>
       <div id="Ingredients_Div">
         <label for="Ingredients">Ingredients</label>
         <br><br>
       </div>
-        <input type="button" id = "addIngr" value="Add Ingredient">
-        <input type="button" id = "removeIngr" value="Remove Ingredient">
+        <input type="button" value="Add Ingredient" onclick="ingred_add()">
+        <input type="button" id = "removeIngr" value="Remove Ingredient" onclick="ingred_rem()">
 
       <br><br>
       <label for="pic">Image</label>
       <input id = "pic" type="file" name="pic" accept="image/*" placeholder="image">
 
-    <input type = "submit" value = "Submit">
+    <input type = "submit" value = "Submit" name = "create_drink">
 </div>
 
 

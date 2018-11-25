@@ -1,15 +1,10 @@
 <?php
-  //This is the main server for the website where it will take care of all POST requests from the various forms on the website
 
-  //Creating sessions to allow for login information to be preserved when visiting different webpages
   session_start();
 
-  //Variables used for holding the currently logged in user for sessions and for holding possible errors that can occur from the input forms
   $username = "";
   $errors = array();
-  $errorsDelete = array();
 
-  //PDO setup to prevent SQL injection as well as variables to hold DB connection information in order to properly authenticate and operate on the database
   $host = 'classmysql.engr.oregonstate.edu';
   $db = 'cs340_schutfot';
   $user = 'cs340_schutfot';
@@ -191,8 +186,137 @@
     $res = $pdo->prepare("UPDATE Drink SET Photo = ?, Title = ?, Description = ? WHERE Drink_ID = ?");
     $res->execute([$photo, $title, $description, $selectOption]);
   }
+      
+  if (isset($_POST['create_drink'])) {
+    try {
+      $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+      $res = $pdo->prepare("SELECT COUNT(Title) AS C FROM Drink WHERE Username = ? AND Title = ?");
+      $res->execute([$_SESSION["username"],$_POST["firstname"]]);
+      $insertion = $res->fetch();
+    
+      if ($insertion["C"] != 0) {
+        echo "<script type=\"text/javascript\"> var err = function () {alert(\"Hello! I am an alert box!!\")} err() </script>";
+        echo "<div class=\"alert\">
+        <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> 
+        You already created a drink with this title.
+      </div> ";
+      }
+      else {
+        // echo "SHITTT";
+        // echo " sascjsabvjhasbdvkhbsdvbaskhdvbsajdbsdvbasjdvbaskhvbskhab";
+        // For Ingredients list
+        $type_amt_arr = array();
+        $ingredient_arr = array();
+        $type_arr = array();
+        $amount_arr = array();
+        $j = 0;
+        foreach ($_POST["Type_amt"] as $key) {
+          array_push($type_amt_arr, $key);
+          echo "$type_amt_arr[$j]";
+        }
+        echo "<br>";
+        foreach ($_POST["Ingredient"] as $key) {
+          array_push($ingredient_arr, $key);
+        }
 
+        foreach ($_POST["Type"] as $key) {
+          array_push($type_arr, $key);
+        }
 
+        foreach ($_POST["Amount"] as $key) {
+          array_push($amount_arr, $key);
+        }
 
+        // For steps field
+        $steps_arr = array();
+        
+        foreach ($_POST["Steps"] as $key) {
+          array_push($steps_arr, $key);
+        }
 
+        # For Equipement Field
+        $equipment_arr = array();
+        foreach ($_POST["Equipment"] as $key) {
+          array_push($equipment_arr, $key);
+        }
+
+        # Inserts the drink
+        $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+        $res = $pdo->prepare("INSERT INTO Drink (Photo,Title,Description,Username) VALUES (?,?,?,?)");
+        $res->execute([$_POST["pic"],$_POST["firstname"],$_POST["Description"],$_SESSION["username"]]);
+        // echo "$<br>";
+        // $res = $pdo->query("INSERT INTO Drink (Photo,Title,Description,Username) VALUES ('','svsdvs','sdvsdv','abc')");
+        
+        // echo "$_POST[\"Photo\"]],$_POST[\"firstname\"],$_POST[\"Description\"],$_POST[\"Username\"]";
+        var_dump($_POST);
+
+        # Retrieves the drinkID
+        $res = $pdo->prepare("SELECT
+        DRINK_ID AS ID FROM Drink WHERE Drink.Title = ?");
+        $res->execute([$_POST["firstname"]]);
+        $nameid_fetch = $res->fetch();
+        
+        # Inserts the equipment realated stuff
+        if (count($equipment_arr) > 0){
+          echo count($equipment_arr);
+          echo "<br>";
+          foreach ($equipment_arr as $equip){
+            $res = $pdo->prepare("SELECT Equipment_ID AS ID FROM Equipment WHERE Equipment.Name = ?");
+            $res->execute([$equip]);
+            $answer = $res->fetch();
+            if ($answer["ID"] > 0){
+              echo "<br><br>";
+              $res = $pdo->prepare("INSERT INTO Uses (Equipment_ID, Drink_ID) VALUES (?,?)");
+              $res->execute([$answer["ID"],$nameid_fetch["ID"]]);
+            }
+            else {
+              $res = $pdo->prepare("INSERT INTO Equipment (Name) VALUES (?)");
+              $res->execute([$equip]);
+              $res = $pdo->prepare("SELECT Equipment_ID AS ID FROM Equipment WHERE Equipment.Name = ?");
+              $res->execute([$equip]);
+              $answer1 = $res->fetch();
+              $res = $pdo->prepare("INSERT INTO Uses (Equipment_ID, Drink_ID) VALUES (?,?)");
+              $res->execute([$answer1["ID"], $nameid_fetch["ID"]]);
+            }
+          }
+        }
+
+        if (count($steps_arr) > 0) {
+          $iterator = 1;
+          foreach ($steps_arr as $step) {
+            $res = $pdo->prepare("INSERT INTO Steps (Step_Number, Drink_ID, Instructions) VALUES (?,?,?)");
+            $res->execute([$iterator++, $nameid_fetch["ID"], $step]);
+          }
+        }
+
+        if (count($ingredient_arr) > 0){
+          for ($i = 0;$i<count($ingredient_arr);$i++) {
+            $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
+            $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+            $ing_id = $res->fetch();
+              // If Ingredient already exists then just add a new tuple with the new drink_id and the same ingredient_ID
+            if ($ing_id["ID"] > 0) {
+              $res = $pdo->prepare("INSERT INTO Contains (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
+              $res->execute([$nameid_fetch["ID"],$ing_id["ID"],$amount_arr[$i]]);
+            }
+            else {  // If a new ingredient is being used
+              $res = $pdo->prepare("INSERT INTO Ingredient (Name, Type, Units) VALUES (?,?,?)");
+              $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+              echo " hello <br> $type_amt_arr[$i]";  
+              $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
+              $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+              $ing_id1 = $res->fetch();
+              $res = $pdo->prepare("INSERT INTO Contains (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
+              $res->execute([$nameid_fetch["ID"],$ing_id1["ID"],$amount_arr[$i]]);
+            }
+          }
+        }
+      }
+    // }
+  } catch (\PDOException $e) {
+    echo "SHIT\n";
+    $error_message = $e->getMessage();
+    echo "<tr><td>", $error_message, "</td></tr>\n";
+    }
+  }
 ?>
