@@ -1,5 +1,6 @@
 <?php
 
+  ob_start();
   include 'db-password.php';
   session_start();
 
