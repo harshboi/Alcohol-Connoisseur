@@ -140,7 +140,7 @@ header a {
 .post {
   display: inline-block;
   vertical-align: top;
-  height: 300px;
+  height: 320px;
   width: 300px;
   margin: 10px;
   padding: 10px;
@@ -157,13 +157,14 @@ header a {
 }
 
 .post-image-container img {
-  max-height: 240px;
+  max-height: 200px;
   max-width: 300px;
 }
 
 .post-info-container {
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .post-price {
