@@ -226,9 +226,9 @@
           array_push($type_amt_arr, $key);
           echo "$type_amt_arr[$j]";
         }
-        echo "<br>";
-        foreach ($_POST["Ingredient"] as $key) {
-          array_push($ingredient_arr, $key);
+
+        foreach ($_POST["Ingredients"] as $key) {
+          array_push($ingredient_arr, (int)$key);
         }
 
         foreach ($_POST["Type"] as $key) {
@@ -236,7 +236,7 @@
         }
 
         foreach ($_POST["Amount"] as $key) {
-          array_push($amount_arr, $key);
+          array_push($amount_arr, (int)$key);
         }
 
         // For steps field
@@ -248,8 +248,10 @@
 
         # For Equipement Field
         $equipment_arr = array();
+        // echo "<br>";
         foreach ($_POST["Equipment"] as $key) {
           array_push($equipment_arr, $key);
+          // echo "$equipment_arr[0]";
         }
 
         # Inserts the drink
@@ -260,7 +262,7 @@
         // $res = $pdo->query("INSERT INTO Drink (Photo,Title,Description,Username) VALUES ('','svsdvs','sdvsdv','abc')");
 
         // echo "$_POST[\"Photo\"]],$_POST[\"firstname\"],$_POST[\"Description\"],$_POST[\"Username\"]";
-        var_dump($_POST);
+        // var_dump($_POST);
 
         # Retrieves the drinkID
         $res = $pdo->prepare("SELECT
@@ -270,26 +272,27 @@
 
         # Inserts the equipment realated stuff
         if (count($equipment_arr) > 0){
-          echo count($equipment_arr);
-          echo "<br>";
+          // echo count($equipment_arr);
+          // echo "<br>", $nameid_fetch["ID"];
+          // echo $nameid_fetch["ID"];
           foreach ($equipment_arr as $equip){
             $res = $pdo->prepare("SELECT Equipment_ID AS ID FROM Equipment WHERE Equipment.Name = ?");
             $res->execute([$equip]);
             $answer = $res->fetch();
-            if ($answer["ID"] > 0){
-              echo "<br><br>";
+            if ($answer["ID"] > 0){   // Will check if equipment exists in the db
+              // echo "<br><br>";
               $res = $pdo->prepare("INSERT INTO Uses (Equipment_ID, Drink_ID) VALUES (?,?)");
               $res->execute([$answer["ID"],$nameid_fetch["ID"]]);
             }
-            else {
-              $res = $pdo->prepare("INSERT INTO Equipment (Name) VALUES (?)");
-              $res->execute([$equip]);
-              $res = $pdo->prepare("SELECT Equipment_ID AS ID FROM Equipment WHERE Equipment.Name = ?");
-              $res->execute([$equip]);
-              $answer1 = $res->fetch();
-              $res = $pdo->prepare("INSERT INTO Uses (Equipment_ID, Drink_ID) VALUES (?,?)");
-              $res->execute([$answer1["ID"], $nameid_fetch["ID"]]);
-            }
+            // else {    // Will create the equipment and then insert it into the db
+            //   $res = $pdo->prepare("INSERT INTO Equipment (Name) VALUES (?)");
+            //   $res->execute([$equip]);
+            //   $res = $pdo->prepare("SELECT Equipment_ID AS ID FROM Equipment WHERE Equipment.Name = ?");
+            //   $res->execute([$equip]);
+            //   $answer1 = $res->fetch();
+            //   $res = $pdo->prepare("INSERT INTO Uses (Equipment_ID, Drink_ID) VALUES (?,?)");
+            //   $res->execute([$answer1["ID"], $nameid_fetch["ID"]]);
+            // }
           }
         }
 
@@ -300,27 +303,26 @@
             $res->execute([$iterator++, $nameid_fetch["ID"], $step]);
           }
         }
-
         if (count($ingredient_arr) > 0){
           for ($i = 0;$i<count($ingredient_arr);$i++) {
-            $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
-            $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
-            $ing_id = $res->fetch();
+            // $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
+            // $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+            // $ing_id = $res->fetch();
               // If Ingredient already exists then just add a new tuple with the new drink_id and the same ingredient_ID
-            if ($ing_id["ID"] > 0) {
-              $res = $pdo->prepare("INSERT INTO Contains (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
-              $res->execute([$nameid_fetch["ID"],$ing_id["ID"],$amount_arr[$i]]);
-            }
-            else {  // If a new ingredient is being used
-              $res = $pdo->prepare("INSERT INTO Ingredient (Name, Type, Units) VALUES (?,?,?)");
-              $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
-              echo " hello <br> $type_amt_arr[$i]";
-              $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
-              $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
-              $ing_id1 = $res->fetch();
-              $res = $pdo->prepare("INSERT INTO Contains (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
-              $res->execute([$nameid_fetch["ID"],$ing_id1["ID"],$amount_arr[$i]]);
-            }
+            // if ($ing_id["ID"] > 0) {
+              $res = $pdo->prepare("INSERT INTO Contain (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
+              $res->execute([$nameid_fetch["ID"],$ingredient_arr[$i],$amount_arr[$i]]);
+            // }
+            // else {  // If a new ingredient is being used
+            //   $res = $pdo->prepare("INSERT INTO Ingredient (Name, Type, Units) VALUES (?,?,?)");
+            //   $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+            //   echo " hello <br> $type_amt_arr[$i]";
+            //   $res = $pdo->prepare("SELECT Ingredient_ID AS ID FROM Ingredient WHERE Ingredient.Name = ? AND Ingredient.Type = ? AND Ingredient.Units = ?");
+            //   $res->execute([$ingredient_arr[$i],$type_arr[$i],$type_amt_arr[$i]]);
+            //   $ing_id1 = $res->fetch();
+            //   $res = $pdo->prepare("INSERT INTO Contain (Drink_ID, Ingredient_ID, Amount) VALUES (?,?,?)");
+            //   $res->execute([$nameid_fetch["ID"],$ing_id1["ID"],$amount_arr[$i]]);
+            // }
           }
         }
       }
