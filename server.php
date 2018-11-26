@@ -235,7 +235,7 @@
         }
 
         foreach ($_POST["Ingredients"] as $key) {
-          array_push($ingredient_arr, (int)$key);
+          array_push($ingredient_arr, $key);
         }
 
         foreach ($_POST["Type"] as $key) {
