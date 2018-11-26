@@ -285,6 +285,9 @@
 
       <?php if(isset($_SESSION['username'])) : ?>
       <form method = "post">
+        <?php
+          include('errors.php');
+        ?>
         <input type="text" id = "comment" name="comment" placeholder="Comment">
         <br>
         <input type="text" id = "drinkID" name="drinkID" value = '<?php echo $_SESSION['drinkID']; ?>' style = "display: none">

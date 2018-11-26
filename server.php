@@ -153,14 +153,21 @@
     }
   }
 
+  //If the user wants to enter a new comment
   if(isset($_POST['newcomment'])){
     $comment = $_POST["comment"];
     $drinkID = $_POST["drinkID"];
     $username = $_SESSION['username'];
-    //$drinkID = $_POST["drinkID"];
-    $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
-    $res = $pdo->prepare('INSERT INTO Comment(Text, Drink_ID, Username) VALUES (?,?,?)');
-    $res->execute([$comment, $drinkID, $username]);
+
+    if($comment != ""){
+      //Insert a new comment based on the text and drinkID
+      $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
+      $res = $pdo->prepare('INSERT INTO Comment(Text, Drink_ID, Username) VALUES (?,?,?)');
+      $res->execute([$comment, $drinkID, $username]);
+    }
+    else{
+      array_push($errors, "Can't add a blank comment");
+    }
   }
 
   //If the user wants to update the title, description or photo of any drinks
