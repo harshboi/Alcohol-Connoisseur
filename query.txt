@@ -1,0 +1,8 @@
+SELECT Drink.Drink_ID, Photo, Title, Description, Drink.Username, count(*) 
+FROM Drink LEFT JOIN Likes 
+ON Drink.Drink_ID = Likes.Drink_ID 
+GROUP BY Drink.Drink_ID
+
+
+SELECT Ingredient.Name, Contain.Amount, Ingredient.Units From Ingredient, Contain WHERE Ingredient.Ingredient_ID = Contain.Ingredient_ID and Contain.Drink_ID = 1
+
