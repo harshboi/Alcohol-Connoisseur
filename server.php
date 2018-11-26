@@ -214,7 +214,7 @@
       </div> ";
       }
       else {
-
+        // ec
         // echo " sascjsabvjhasbdvkhbsdvbaskhdvbsajdbsdvbasjdvbaskhvbskhab";
         // For Ingredients list
         $type_amt_arr = array();
