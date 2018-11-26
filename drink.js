@@ -19,7 +19,7 @@ $.ajax({
         var stepNew = document.createElement("input");
         stepNew.setAttribute("type", "text");
         stepNew.setAttribute("id", "Steps");
-        stepNew.setAttribute("name", "Steps");
+        stepNew.setAttribute("name", "Steps[]");
         stepNew.setAttribute("placeholder", "Step " + step_amt);
         stepNew.required = true;
         steps.appendChild(stepNew);
@@ -56,12 +56,12 @@ $.ajax({
         //Create a select listbox that will display the static ingredients currently in the DB that the user can choose from
         var type = document.createElement("select");
         type.setAttribute("id", "Ingredients");
-        type.setAttribute("name", "Ingredients");
+        type.setAttribute("name", "Ingredients[]");
 
         //Loop through queries and insert a new option with the ingredient name, type and unit
         for(var i = 0; i < max; i++){
           optionAlch = document.createElement("option");
-          optionAlch.setAttribute("value", "ingredientInformation");
+          optionAlch.setAttribute("value", i+1);
           alcohol = document.createTextNode(data[1][i] + " (" + data[2][i] + "/" + data[3][i] + ")");
           optionAlch.appendChild(alcohol);
           type.appendChild(optionAlch);
@@ -75,7 +75,7 @@ $.ajax({
         amount = document.createElement("input");
         amount.setAttribute("type", "number");
         amount.setAttribute("id", "Amount");
-        amount.setAttribute("name", "Amount");
+        amount.setAttribute("name", "Amount[]");
         amount.setAttribute("placeholder", "Amount");
         amount.required = true;
         steps.appendChild(amount);
@@ -117,12 +117,12 @@ $.ajax({
         //Creates a new listbox where the user can pick one of the equipment that is currently in the DB
         var type = document.createElement("select");
         type.setAttribute("id", "Equipment");
-        type.setAttribute("name", "Equipment");
+        type.setAttribute("name", "Equipment[]");
 
         //Loop through the equipment queries and display each tuple as a new option in the listbox
         for(var i = 0; i < max; i++){
           optionEquip = document.createElement("option");
-          optionEquip.setAttribute("value", "EquipmentInfo");
+          optionEquip.setAttribute("value", data[0][i]);
           equipment = document.createTextNode(data[0][i]);
           optionEquip.appendChild(equipment);
           type.appendChild(optionEquip);
