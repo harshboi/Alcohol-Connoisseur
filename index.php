@@ -9,6 +9,7 @@
   }
 
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -63,55 +64,13 @@
     <main class="content">
       <aside class="filter-container">
 
-        <h2>Filters</h2>
+        <h2>Search</h2>
 
         <div class="filter-input-container">
-          <label for="filter-text" class="filter-input-label">Title contains</label>
+          <label for="filter-text" class="filter-input-label">Title</label>
           <input type="text" name="filter-text" id="filter-text" class="filter-input">
         </div>
 
-        <div class="filter-input-container">
-          <label for="filter-min-price" class="filter-input-label">Likes</label>
-          <input type="number" name="filter-min-price" id="filter-min-price" class="filter-input" placeholder="min">
-          <input type="number" name="filter-max-price" id="filter-max-price" class="filter-input" placeholder="max">
-        </div>
-
-        <div class="filter-input-container">
-          <label for="filter-city">Alcohol</label>
-          <select id="filter-city" class="filter-input" name="filter-city">
-            <option selected value="">Any</option>
-            <option>Rum</option>
-            <option>Vodka</option>
-            <option>Tequila</option>
-            <option>Whiskey</option>
-          </select>
-        </div>
-
-        <div class="filter-input-container">
-          <fieldset id="filter-condition" class="filter-fieldset">
-            <legend>Equipment</legend>
-            <div>
-              <input type="checkbox" name="filter-condition" id="filter-condition-new" value="new">
-              <label for="filter-condition-new">Shaker</label>
-            </div>
-            <div>
-              <input type="checkbox" name="filter-condition" id="filter-condition-excellent" value="excellent">
-              <label for="filter-condition-excellent">Blender</label>
-            </div>
-            <div>
-              <input type="checkbox" name="filter-condition" id="filter-condition-good" value="good">
-              <label for="filter-condition-good">Strainer</label>
-            </div>
-            <div>
-              <input type="checkbox" name="filter-condition" id="filter-condition-fair" value="fair">
-              <label for="filter-condition-fair">Mixer </label>
-            </div>
-            <div>
-              <input type="checkbox" name="filter-condition" id="filter-condition-poor" value="poor">
-              <label for="filter-condition-poor">Stir Stick</label>
-            </div>
-          </fieldset>
-        </div>
 
         <button id="filter-update-button" class="action-button">Update</button>
 
@@ -141,7 +100,8 @@
             $sql = "SELECT Drink.Drink_ID, Photo, Title, Description, Drink.Username, count(*) FROM Drink LEFT JOIN Likes ON Drink.Drink_ID = Likes.Drink_ID GROUP BY Drink.Drink_ID";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-					
+			
+			//For each drink fetch all information to be displayed on homepage
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 			
 				$title = $row['Title'];
@@ -151,6 +111,12 @@
 				$likes = $row['count(*)'];
 				$drinkcreater = $row['Username'];
 				
+				//If the photo doesn't exist, set as default image
+				if($photo == ""){
+					$photo = "cocktail.png";
+				}
+			
+			//Place the drink in the html as a post
 			echo"<div class='post' data-price='",$likes,"' data-city='",$description,"'>";
 			echo"<div class='post-contents'>";
             echo"<div class='post-image-container'>";
@@ -178,6 +144,4 @@
     </main>
 
   </body>
-
-  <script src="index.js" charset="utf-8"></script>
 </html>

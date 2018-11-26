@@ -165,6 +165,10 @@
 				$description = $row['Description'];
 				$drinkcreater = $row['Username'];
 				$likes = $row['count(*)'];
+				
+				if($photo == ""){
+					$photo = "cocktail.png";
+				}
 
 				// The like button
 				if ( $removeLike == 0) {
