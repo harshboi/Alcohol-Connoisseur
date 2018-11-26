@@ -243,7 +243,7 @@
         }
 
         foreach ($_POST["Amount"] as $key) {
-          array_push($amount_arr, (int)$key);
+          array_push($amount_arr, $key);
         }
 
         // For steps field
