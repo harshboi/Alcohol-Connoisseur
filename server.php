@@ -172,7 +172,7 @@
 
   //If the user wants to update the title, description or photo of any drinks
   if(isset($_POST['updateDrink'])){
-
+ 
     //Variables to hold the drink they have selected, and the current photo, title and description from the DB
     $selectOption = $_POST["drinksUpdate"];
     $photo;
@@ -189,11 +189,12 @@
     $photo = $user['Photo'];
     $title = $user['Title'];
     $description = $user['Description'];
-
+ 
     //If any of the input text boxes are empty then keep current information for any empty input boxes, else update
-    if($_POST["pic"] != ""){
-      $photo = $_POST["pic"];
-    }
+    //if($_POST["pic"] != ""){
+	//	$photo = $myfile;
+    //}
+	
     if($_POST["Title"] != ""){
       $title = $_POST["Title"];
     }
@@ -260,11 +261,54 @@
           array_push($equipment_arr, $key);
           // echo "$equipment_arr[0]";
         }
+	
+		# Upload new file containing the pic
+
+		$target_dir = "images/";
+		$target_file = $target_dir . basename($_FILES["pic"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+		// Check if image file is a actual image or fake image
+		$check = getimagesize($_FILES["pic"]["tmp_name"]);
+		if($check !== false) {
+				//echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+		} else {
+				//echo "File is not an image.";
+				$uploadOk = 0;
+		}
+		// Check if file already exists
+		if (file_exists($target_file)) {
+			//echo "Sorry, file already exists.";
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+			//echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+				//echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file)) {
+					//echo "The file ". basename( $_FILES["pic"]["name"]). " has been uploaded.";
+					$myfile = basename( $_FILES["pic"]["name"]);
+					// store $myfile in the database
+			} else {
+				//echo "Sorry, there was an error uploading your file.";
+				$myfile = "";
+			}
+		}
+		
+		# end of file upload				
 
         # Inserts the drink
         $pdo = new PDO($dsn, $user, $pass, $opt); //Uses database information for the PDO
         $res = $pdo->prepare("INSERT INTO Drink (Photo,Title,Description,Username) VALUES (?,?,?,?)");
-        $res->execute([$_POST["pic"],$_POST["firstname"],$_POST["Description"],$_SESSION["username"]]);
+        $res->execute([$myfile,$_POST["firstname"],$_POST["Description"],$_SESSION["username"]]);
         // echo "$<br>";
         // $res = $pdo->query("INSERT INTO Drink (Photo,Title,Description,Username) VALUES ('','svsdvs','sdvsdv','abc')");
 

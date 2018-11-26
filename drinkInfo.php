@@ -23,13 +23,13 @@
 
                 //Query all the equipment names and push them in an array
                 $pdo = new PDO($dsn, $user, $pass, $opt);
-                $res = $pdo->query("SELECT Name FROM Equipment");
+                $res = $pdo->query("SELECT Name FROM Equipment order by Name");
                 foreach($res as $row){
                   $equipmentName['equipment'] = array_push($equipmentName, $row['Name']);
                 }
 
                 //Query all the ingredients names and their associated type and units
-                $res = $pdo->query("SELECT Name, Type, Units FROM Ingredient");
+                $res = $pdo->query("SELECT Name, Type, Units FROM Ingredient Order by Name");
                 foreach($res as $row){
                   $ingredientName['name'] = array_push($ingredientName, $row['Name']);
                   $ingredientType['type'] = array_push($ingredientType, $row['Type']);

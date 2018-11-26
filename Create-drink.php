@@ -68,7 +68,7 @@
 <div class = "Create_drink">
   <h1>Upload your drink</h1>
   <h3>Fill out the form below</h3>
-    <form action = "Create-drink.php" method = "post">
+    <form action = "Create-drink.php" method = "post" enctype="multipart/form-data">
       <label for="fname">Title</label>
       <input type="text" id="fname" name="firstname" placeholder="Title" required>
 

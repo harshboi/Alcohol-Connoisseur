@@ -96,7 +96,7 @@
     <!-- </div> -->
     <div class = "UpdateDrink" style="display:none">
       <h2>Update Drink Information</h2>
-        <form action = "my-account.php" method = "post">
+        <form action = "my-account.php" method = "post" enctype="multipart/form-data">
           <br>
           <label for="drinksUpdate">Drink List</label>
           <select id="drinksUpdate" class="drinksUpdate" name="drinksUpdate">
@@ -106,8 +106,6 @@
           <input type="text" id="Title" name="Title" placeholder="Title">
           <br><br>
           <textarea id="Description" name="Description" placeholder="Description"></textarea>
-          <br><br>
-          <input id = "pic" type="file" name="pic" accept="image/*" placeholder="image">
           <br><br>
         <input type = "submit" name ="updateDrink" value = "Update">
     <hr>
