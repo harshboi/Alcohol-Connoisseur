@@ -1,5 +1,5 @@
 # CS340_Final
-A website to upload drinks and collaborate with other members.
+Group Project where we create a website where we can add a drink, delete a drink, create users, authenticate log-in, add comments, update drinks and comments
 
 ![alt text](https://github.com/Sakthisa/Alcohol-Connoisseur/blob/master/Photos/Home%20Page.PNG)
 ![alt text](https://github.com/Sakthisa/Alcohol-Connoisseur/blob/master/Photos/IMG_0068.png)
