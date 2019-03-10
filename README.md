@@ -1,4 +1,4 @@
-# CS340_Final
+# Alcohol Connoisseur
 Group Project (Sachin Sakthivel, Harshvardhan Singh, Theodor Schutfort) where we create a website where we can add a drink, delete a drink, create users, authenticate log-in, add comments, update drinks and comments
 
 ![alt text](https://github.com/Sakthisa/Alcohol-Connoisseur/blob/master/Photos/Relational%20Diagram.PNG)
